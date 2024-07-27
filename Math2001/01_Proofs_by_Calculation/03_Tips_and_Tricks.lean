@@ -107,10 +107,17 @@ example {x y : ℤ} (h1 : x - 3 * y = 5) (h2 : y = 3) : x = 14 :=
         _= 14 := by ring
 
 example {p q : ℚ} (h1 : p - 2 * q = 1) (h2 : q = -1) : p = -1 :=
-  sorry
+   calc
+   p = (p -2*q) + 2*q := by ring
+   _= 1 + 2*(-1) := by rw[h1,h2]
+   _= -1 := by ring
+  
 
 example {x y : ℚ} (h1 : y + 1 = 3) (h2 : x + 2 * y = 3) : x = -1 :=
-  sorry
+  calc
+  x = (x + 2*y) - 2*(y+1) + 2 := by ring
+ _= (3) - 2*(3) + 2 := by rw [h1,h2]
+ _= -1 := by ring
 
 example {p q : ℤ} (h1 : p + 4 * q = 1) (h2 : q - 1 = 2) : p = -11 :=
   sorry
@@ -132,7 +139,11 @@ example {x y : ℤ} (h1 : 2 * x + y = 4) (h2 : x + y = 1) : x = 3 :=
   sorry
 
 example {a b : ℝ} (h1 : a + 2 * b = 4) (h2 : a - b = 1) : a = 2 :=
-  sorry
+ calc
+ a = ((a+2*b) + 2*(a-b))/3 := by ring
+ _= (4 + 2*(1))/3 := by rw[h1,h2]
+ _= (6/3):= by ring
+ _= 2 := by ring
 
 example {u v : ℝ} (h1 : u + 1 = v) : u ^ 2 + 3 * u + 1 = v ^ 2 + v - 1 :=
   sorry
