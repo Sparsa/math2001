@@ -120,7 +120,11 @@ example {x y : ℚ} (h1 : y + 1 = 3) (h2 : x + 2 * y = 3) : x = -1 :=
  _= -1 := by ring
 
 example {p q : ℤ} (h1 : p + 4 * q = 1) (h2 : q - 1 = 2) : p = -11 :=
-  sorry
+  calc
+  p = (p+4*q) - 4*(q-1) - 4 := by ring
+  _= 1 - 4*2 -4 := by rw [h1,h2]
+  _= -11 := by ring
+
 
 example {a b c : ℝ} (h1 : a + 2 * b + 3 * c = 7) (h2 : b + 2 * c = 3)
     (h3 : c = 1) : a = 2 :=
