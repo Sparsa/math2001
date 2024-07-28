@@ -128,10 +128,16 @@ example {p q : ℤ} (h1 : p + 4 * q = 1) (h2 : q - 1 = 2) : p = -11 :=
 
 example {a b c : ℝ} (h1 : a + 2 * b + 3 * c = 7) (h2 : b + 2 * c = 3)
     (h3 : c = 1) : a = 2 :=
-  sorry
+ calc
+ a = (a + 2*b + 3*c) - 2 * (b + 2*c) + c := by ring
+ _=  7 - 2*(3) + 1 := by rw[ h1,h2,h3 ]
+ _= 2 := by ring:
 
 example {u v : ℚ} (h1 : 4 * u + v = 3) (h2 : v = 2) : u = 1 / 4 :=
-  sorry
+ calc
+ u = (4*u+v - v)/4 := by ring
+ _= (3-2)/4 := by rw [h1,h2]
+ _= 1/4 := by ring]
 
 example {c : ℚ} (h1 : 4 * c + 1 = 3 * c - 2) : c = -3 :=
   sorry
