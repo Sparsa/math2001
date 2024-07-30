@@ -178,9 +178,21 @@ example {t : ℚ} (ht : t ^ 2 - 4 = 0) :
  _= t^2*0 + 3*t*0 + 0 + 10*t + 2 := by rw[ht]
  _= 10*t + 2 := by ring
 
-example {x y : ℝ} (h1 : x + 3 = 5) (h2 : 2 * x - y * x = 0) : y = 2 :=
-sorry
-
+example {x y : ℝ} (h1 : x + 3 = 5) (h2 : 2 * x - y * x = 0) :
+have hx : x = 2 :=
+calc
+x = x+3 -3 := by ring
+_= 5 - 3 := by rw[h1]
+_= 2 := by ring
+calc
+have hy : x*y = 4 :=
+calc
+x*y  = -(2*x - y*x) + 2*x := by ring
+_= -0 + 2*2 := by rw[h2,hx]
+_= 4:= by ring
+y = 2 :=
+calc
+y = 2 := by simp
 
 example {p q r : ℚ} (h1 : p + q + r = 0) (h2 : p * q + p * r + q * r = 2) :
     p ^ 2 + q ^ 2 + r ^ 2 = -4 :=
