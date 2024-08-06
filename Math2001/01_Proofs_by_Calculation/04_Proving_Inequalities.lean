@@ -67,7 +67,7 @@ example {n : ℤ} (hn : n ≥ 5) : n ^ 2 > 2 * n + 11 :=
   n^2 = (n-1)^2 + 2*n -1 := by ring
   _≥ (5-1)^2 + 2*n -1 := by rel [hn]
   _= 2*n + 15 := by ring
-  _> 2*n + 11 := by number
+  _> 2*n + 11 := by ring
 
 
 -- why this is not working??
@@ -167,4 +167,4 @@ example {x : ℚ} : x ^ 2 - 2 * x ≥ -1 :=
 example (a b : ℝ) : a ^ 2 + b ^ 2 ≥ 2 * a * b :=
  calc
  a^2 + b^2 = (a-b)^2 + 2*a*b := by ring
- _≥ 2*a*b := by --same reason as above
+ _≥ 2*a*b := by  --same reason as above
