@@ -168,11 +168,9 @@ example {x : ℚ} : x ^ 2 - 2 * x ≥ -1 := by
   -- have to look for the tactic to use here
 count_heartbeats in -- count heartbeats basically checks the complexity of the operation.
 example (a b : ℝ) : a ^ 2 + b ^ 2 ≥ 2 * a * b :=
-have hb : (a-b)^2 ≥ 0 := sq_nonneg (a-b)
  calc
  a^2 + b^2 = (a-b)^2 + 2*a*b := by ring
- _≥ 0 + 2*a*b := by rel [hb]
- _= 2*a*b := by ring
+ _≥  2*a*b := by extra
 
  --same reason as above
 -- example {x: ℚ} (hx : 2*x = 3) : x ≠ 1 := by
