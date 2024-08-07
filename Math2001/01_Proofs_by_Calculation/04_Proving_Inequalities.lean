@@ -67,7 +67,7 @@ example {n : ℤ} (hn : n ≥ 5) : n ^ 2 > 2 * n + 11 :=
   n^2 = (n-1)^2 + 2*n -1 := by ring
   _≥ (5-1)^2 + 2*n -1 := by rel [hn]
   _= 2*n + 15 := by ring
-  _> 2*n + 11 := by ring
+  _> 2*n + 11 := by norm_num
 
 
 -- why this is not working??
@@ -148,7 +148,7 @@ example {n : ℤ} (hn : n ≥ 10) : n ^ 4 - 2 * n ^ 2 > 3 * n ^ 3 :=
   _≥ 3*n^3 +n^2*(7*10 -2) := by rel [hn]
   _≥ 3*n^3 + 10^2 *(7*10 - 2) := by rel[hn]
   _= 3*n^3 + 6800 := by ring
-  _> 3*n^3 := by ring
+  _> 3*n^3 := by norm_num
 
 
 example {n : ℤ} (h1 : n ≥ 5) : n ^ 2 - 2 * n + 3 > 14 :=
@@ -158,13 +158,26 @@ example {n : ℤ} (h1 : n ≥ 5) : n ^ 2 - 2 * n + 3 > 14 :=
  _= 18 := by ring
  _> 14 := by numbers
 
-example {x : ℚ} : x ^ 2 - 2 * x ≥ -1 :=
-       calc
-       x^2-2*x = (x-1)^2 - 1 := by ring
-       _≥ -1 := by -- this is trivial because the value of a square is always square
-       -- have to look for the tactic to use here
+example {x : ℚ} : x ^ 2 - 2 * x ≥ -1 := by
+        have hb : (x-1)^2 ≥ 0 :=  sq_nonneg (x-1)
+        calc
+        x^2 - 2*x = (x-1)^2 -1 := by ring
+        _≥ 0 -1 := by rel [hb]
+        _= -1 := by ring
 
+  -- have to look for the tactic to use here
+count_heartbeats in -- count heartbeats basically checks the complexity of the operation.
 example (a b : ℝ) : a ^ 2 + b ^ 2 ≥ 2 * a * b :=
+have hb : (a-b)^2 ≥ 0 := sq_nonneg (a-b)
  calc
  a^2 + b^2 = (a-b)^2 + 2*a*b := by ring
- _≥ 2*a*b := by  --same reason as above
+ _≥ 0 + 2*a*b := by rel [hb]
+ _= 2*a*b := by ring
+
+ --same reason as above
+-- example {x: ℚ} (hx : 2*x = 3) : x ≠ 1 := by
+-- apply ne_of_lt
+-- calc
+--     x = 2*x/2 := by ring
+--     _= 3/2 := by rw[hx]
+--     _<1 := by apply?
