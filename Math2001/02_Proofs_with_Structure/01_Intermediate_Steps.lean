@@ -14,21 +14,21 @@ example {a b : ℝ} (h1 : a - 5 * b = 4) (h2 : b + 2 = 3) : a = 9 := by
 
 
 example {m n : ℤ} (h1 : m + 3 ≤ 2 * n - 1) (h2 : n ≤ 5) : m ≤ 6 := by
-  have h3 :=
+  have h3 := -- this is the intermediate calculation and we proved that m+3 ≤ 9
   calc
     m + 3 ≤ 2 * n - 1 := by rel [h1]
     _ ≤ 2 * 5 - 1 := by rel [h2]
     _ = 9 := by numbers
-  addarith [h3]
+  addarith [h3] -- by addarith they are using arithmatic computation to solve it.
 
 
 example {r s : ℚ} (h1 : s + 3 ≥ r) (h2 : s + r ≤ 3) : r ≤ 3 := by
-  have h3 : r ≤ 3 + s := by sorry -- justify with one tactic
-  have h4 : r ≤ 3 - s := by sorry -- justify with one tactic
+  have h3 : r ≤ 3 + s := by addarith [h1] -- justify with one tactic
+  have h4 : r ≤ 3 - s := by addarith [h2] -- justify with one tactic
   calc
-    r = (r + r) / 2 := by sorry -- justify with one tactic
-    _ ≤ (3 - s + (3 + s)) / 2 := by sorry -- justify with one tactic
-    _ = 3 := by sorry -- justify with one tactic
+    r = (r + r) / 2 := by ring -- justify with one tactic
+    _ ≤ (3 - s + (3 + s)) / 2 := by rel [h3,h4] -- justify with one tactic
+    _ = 3 := by ring -- justify with one tactic
 
 example {t : ℝ} (h1 : t ^ 2 = 3 * t) (h2 : t ≥ 1) : t ≥ 2 := by
   have h3 :=
@@ -44,7 +44,8 @@ example {a b : ℝ} (h1 : a ^ 2 = b ^ 2 + 1) (h2 : a ≥ 0) : a ≥ 1 := by
     a ^ 2 = b ^ 2 + 1 := by rw [h1]
     _ ≥ 1 := by extra
     _ = 1 ^ 2 := by ring
-  cancel 2 at h3
+  cancel 2 at h3 -- cancel tactic is used to cancel same element from both
+  -- right side and left side
 
 
 example {x y : ℤ} (hx : x + 3 ≤ 2) (hy : y + 2 * x ≥ 3) : y > 3 := by
