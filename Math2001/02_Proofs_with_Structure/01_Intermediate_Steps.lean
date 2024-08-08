@@ -49,22 +49,53 @@ example {a b : ℝ} (h1 : a ^ 2 = b ^ 2 + 1) (h2 : a ≥ 0) : a ≥ 1 := by
 
 
 example {x y : ℤ} (hx : x + 3 ≤ 2) (hy : y + 2 * x ≥ 3) : y > 3 := by
-  sorry
+  have hxx : -x ≥ 1 := by addarith [hx]
+  calc
+  y = y+2*x - 2*x := by ring
+  _≥ 3 - 2*(x) := by rel[hy]
+  _= 3 + 2*(-x) := by ring
+  _≥ 3 + 2*1 := by rel [hxx]
+  _> 3 := by numbers
 
-example (a b : ℝ) (h1 : -b ≤ a) (h2 : a ≤ b) : a ^ 2 ≤ b ^ 2 := by
-  sorry
+example (a b : ℝ) (h1 : -b ≤ a) (h2 : a ≤ b) : a ^ 2  ≤ b ^ 2 := by
+ have hb : b + a ≥ 0 := by addarith[h1] -- I was trying to put a forward, this is part of our congnitive bias
+ -- we were trying to only think of the fact that we have
+ have ha : b - a ≥ 0 := by addarith [h2]
+ calc
+    a^2 ≤ (b-a)*(b+a)+a^2 := by extra
+    _= b^2 - b^2 + b^2 := by ring
+    _= b^2 := by ring
 
 example (a b : ℝ) (h : a ≤ b) : a ^ 3 ≤ b ^ 3 := by
-  sorry
-
+have ha : b - a ≥ 0 := by addarith [h]
+calc
+  a^3 ≤ a^3 + ((b-a) *((b-a)^2 + 3*(b+a)^2))/4  := by extra
+  _=  b^3  := by ring
+-- here the trick was the really understand what you reall want to do.
 /-! # Exercises -/
 
 
 example {x : ℚ} (h1 : x ^ 2 = 4) (h2 : 1 < x) : x = 2 := by
-  sorry
+have ha : x*(x+2) = 2*(x+2) :=
+     calc
+     _= x^2 + 2*x := by ring
+     _= 4 + 2*x := by rw [h1]
+     _= 2*(2+x) := by ring
+     _= 2*(x+2) := by ring
+cancel (x+2) at ha
+
+
+  
 
 example {n : ℤ} (hn : n ^ 2 + 4 = 4 * n) : n = 2 := by
-  sorry
+ have hn1 :=  -- have is the block starting.
+      calc
+        (n-2)^2 = n^2 +4 -4*n := by ring
+        _= 4*n - 4*n := by rw [hn]
+        _= 0^2 := by ring
+ cancel 2 at hn1
+ addarith[hn1]
+
 
 example (x y : ℚ) (h : x * y = 1) (h2 : x ≥ 1) : y ≤ 1 := by
   sorry
