@@ -17,12 +17,20 @@ example {x y : ℝ} (h : x = 1 ∨ y = -1) : x * y + x = y + 1 := by
 
 example {n : ℕ} : n ^ 2 ≠ 2 := by
   have hn := le_or_succ_le n 1
-  obtain hn | hn := hn
+  obtain hn | hm := hn
   apply ne_of_lt
   calc
     n ^ 2 ≤ 1 ^ 2 := by rel [hn]
     _ < 2 := by numbers
-  sorry
+  apply ne_of_gt
+  calc
+    n^2 = n*n := by ring
+    _≥ 2*n := by rel[hm]
+    _≥ 2*2 := by rel[hm]
+    _= 4 := by ring
+    _> 2 := by numbers
+
+
 
 example {x : ℝ} (hx : 2 * x + 1 = 5) : x = 1 ∨ x = 2 := by
   right
@@ -37,8 +45,27 @@ example {x : ℝ} (hx : x ^ 2 - 3 * x + 2 = 0) : x = 1 ∨ x = 2 := by
     calc
     (x - 1) * (x - 2) = x ^ 2 - 3 * x + 2 := by ring
     _ = 0 := by rw [hx]
-  have h2 := eq_zero_or_eq_zero_of_mul_eq_zero h1
-  sorry
+  have h2 := eq_zero_or_eq_zero_of_mul_eq_zero h1 -- this tactic coverts the possible zero things to or of them
+  obtain hx1 | hx2 := h2 -- I am splitting the two component of or
+  . left
+    calc
+    x  = x-1 + 1 := by ring
+    _= 0 + 1 := by rw[hx1]
+    _= 1 := by ring
+  . right
+    calc
+    x = x-2 +2 := by ring
+    _= 0 + 2 := by rw[hx2]
+    _= 2 := by ring
+
+-- I tried a lot to complete the previous goal
+-- not because I dont now how the proof works
+-- but rather I am still not able to understnd how lean works :P
+-- The language syntax and semantics are still kind of blurry to me
+
+
+
+
 
 example {n : ℤ} : n ^ 2 ≠ 2 := by
   have hn0 := le_or_succ_le n 0
