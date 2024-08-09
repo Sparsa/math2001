@@ -85,7 +85,7 @@ have ha : x*(x+2) = 2*(x+2) :=
 cancel (x+2) at ha
 
 
-  
+
 
 example {n : ℤ} (hn : n ^ 2 + 4 = 4 * n) : n = 2 := by
  have hn1 :=  -- have is the block starting.
@@ -95,7 +95,14 @@ example {n : ℤ} (hn : n ^ 2 + 4 = 4 * n) : n = 2 := by
         _= 0^2 := by ring
  cancel 2 at hn1
  addarith[hn1]
+-- I have still problems with the issue that I can not do the thing properly.
 
 
 example (x y : ℚ) (h : x * y = 1) (h2 : x ≥ 1) : y ≤ 1 := by
-  sorry
+ have hy : x*y > 0 := by extra
+ have hyy : y > 0 := by cancel x at hy
+ calc
+ y =  (x*y)/x := by cancel [h2]
+ _= 1/x := by rw [h]
+ _≤ 1/(1) := by extra
+ _= 1 := by ring
