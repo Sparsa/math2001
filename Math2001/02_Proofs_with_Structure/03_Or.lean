@@ -135,18 +135,29 @@ example {x y : ℝ} (h : x = 2 ∨ y = -2) : x * y + 2 * x = 2 * y + 4 := by
  . calc
    x*y + 2*x = 2*y + 2*2 := by rw[hx]
    _= 2*y + 4 := by ring
-   have
  . calc
-   x*y + 2*x = x*(-2) + 2*x :=
+   x*y + 2*x = x*(-2) + 2*x := by rw[hy]
+   _= 0 := by ring
+   _= 2*(-2) + 4 := by ring
+   _= 2*y + 4 := by rw[← hy]
 
 example {s t : ℚ} (h : s = 3 - t) : s + t = 3 ∨ s + t = 5 := by
-  sorry
+    left
+    calc
+    s + t = 3 - t + t := by rw [h]
+    _= 3 := by ring
+
+
 
 example {a b : ℚ} (h : a + 2 * b < 0) : b < a / 2 ∨ b < - a / 2 := by
-  sorry
+ right
+ calc
+ b = (a + 2*b - a)/2 := by ring
+ _< (0 -a )/2 := by rel [h]
+ _= -a/2 := by ring
 
 example {x y : ℝ} (h : y = 2 * x + 1) : x < y / 2 ∨ x > y / 2 := by
-  sorry
+
 
 example {x : ℝ} (hx : x ^ 2 + 2 * x - 3 = 0) : x = -3 ∨ x = 1 := by
   sorry
