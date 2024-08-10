@@ -135,6 +135,7 @@ example {x y : ℝ} (h : x = 2 ∨ y = -2) : x * y + 2 * x = 2 * y + 4 := by
  . calc
    x*y + 2*x = 2*y + 2*2 := by rw[hx]
    _= 2*y + 4 := by ring
+   have
  . calc
    x*y + 2*x = x*(-2) + 2*x :=
 
