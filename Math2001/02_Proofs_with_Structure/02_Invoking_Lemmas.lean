@@ -38,7 +38,7 @@ example {m : ℤ} (hm : m + 1 = 5) : 3 * m ≠ 6 := by
 
 
 example {s : ℚ} (h1 : 3 * s ≤ -6) (h2 : 2 * s ≥ -4) : s = -2 := by
-  have h11 : s ≤ -2 := sorry
+  have h11 : s ≤ -2 := cancel 3
   have h22 : s ≥ -2 := sorry
   apply le_antisym
 
