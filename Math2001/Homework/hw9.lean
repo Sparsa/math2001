@@ -16,34 +16,70 @@ Don't forget to compare with the text version,
 https://github.com/hrmacbeth/math2001/wiki/Homework-9,
 for clearer statements and any special instructions. -/
 
-@[autograded 3]
-theorem problem1 {f : X → Y} (hf : Injective f) {g : Y → Z} (hg : Injective g) :
-    Injective (g ∘ f) := by
+
+/- Problem 1: prove one of these, delete the other -/
+
+@[autograded 4]
+theorem problem1a : Surjective (fun (x : ℝ) ↦ 2 * x) := by
   sorry
 
 @[autograded 4]
-theorem problem2a : Bijective (fun (x : ℝ) ↦ 5 + 3 * x) := by
+theorem problem1b : ¬ Surjective (fun (x : ℝ) ↦ 2 * x) := by
+  sorry
+
+
+/- Problem 2: prove one of these, delete the other -/
+
+@[autograded 4]
+theorem problem2a : Surjective (fun (x : ℤ) ↦ 2 * x) := by
   sorry
 
 @[autograded 4]
-theorem problem2b : ¬ Bijective (fun (x : ℝ) ↦ 5 + 3 * x) := by
+theorem problem2b : ¬ Surjective (fun (x : ℤ) ↦ 2 * x) := by
+  sorry
+
+
+/- Problem 3: prove one of these, delete the other -/
+
+@[autograded 4]
+theorem problem3a : ∀ (f : ℚ → ℚ), Injective f → Injective (fun x ↦ f x + 1) := by
+  sorry
+
+@[autograded 4]
+theorem problem3b : ¬ ∀ (f : ℚ → ℚ), Injective f → Injective (fun x ↦ f x + 1) := by
+  sorry
+
+
+/- Problem 4: prove one of these, delete the other -/
+
+@[autograded 4]
+theorem problem4a : Bijective (fun (x : ℝ) ↦ 3 - 2 * x) := by
+  sorry
+
+@[autograded 4]
+theorem problem4b : ¬ Bijective (fun (x : ℝ) ↦ 3 - 2 * x) := by
+  sorry
+
+
+/- Problem 5: prove one of these, delete the other -/
+
+@[autograded 5]
+theorem problem5a :
+    Injective (fun ((x, y, z) : ℝ × ℝ × ℝ) ↦ (x + y + z, x + 2 * y + 3 * z)) := by
   sorry
 
 @[autograded 5]
-theorem problem3 :
-    ¬Injective (fun ((x, y, z) : ℝ × ℝ × ℝ) ↦ (x + y + z, x - 2 * y + z)) := by
+theorem problem5b :
+    ¬Injective (fun ((x, y, z) : ℝ × ℝ × ℝ) ↦ (x + y + z, x + 2 * y + 3 * z)) := by
+  sorry
+
+
+/- Problem 6: prove one of these, delete the other -/
+
+@[autograded 4]
+theorem problem6a : Bijective (fun ((r, s) : ℚ × ℚ) ↦ (s, r + 2 * s)) := by
   sorry
 
 @[autograded 4]
-theorem problem4 : Bijective (fun ((r, s) : ℚ × ℚ) ↦ (s, r + 2 * s)) := by
-  rw [bijective_iff_exists_inverse]
-  use fun (a, b) ↦ (sorry, sorry)
-  sorry
-
-@[autograded 4]
-theorem problem5 : ¬ Surjective (fun ((x, y) : ℚ × ℚ) ↦ x ^ 2 + y ^ 2) := by
-  sorry
-
-@[autograded 5]
-theorem problem6 : Surjective (fun ((x, y) : ℚ × ℚ) ↦ x ^ 2 - y ^ 2) := by
+theorem problem6b : ¬ Bijective (fun ((r, s) : ℚ × ℚ) ↦ (s, r + 2 * s)) := by
   sorry

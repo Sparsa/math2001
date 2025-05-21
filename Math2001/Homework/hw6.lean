@@ -13,32 +13,26 @@ Don't forget to compare with the text version,
 https://github.com/hrmacbeth/math2001/wiki/Homework-6,
 for clearer statements and any special instructions. -/
 
-
 @[autograded 4]
-theorem problem1 (P Q : Prop) : (P ∨ Q) ↔ (Q ∨ P) := by
-  sorry
-
-@[autograded 5]
-theorem problem2 (P : α → Prop) (Q : Prop) : ((∃ x, P x) ∧ Q) ↔ ∃ x, (P x ∧ Q) := by
-  sorry
-
-@[autograded 5]
-theorem problem3 (P Q : Prop) : ¬ (P → Q) ↔ (P ∧ ¬ Q) := by
+theorem problem1 : ¬ (∃ t : ℝ, t ≤ 5 ∧ 2 * t ≥ 12) := by
   sorry
 
 @[autograded 3]
-theorem problem4 : ¬ (∀ x : ℝ, x ^ 2 ≥ x) := by
-  push_neg
+theorem problem2 : ¬ (∃ x : ℝ, ∀ y : ℝ, y ≤ x) := by
+  sorry
+
+@[autograded 3]
+theorem problem3 (a : ℚ) : 3 * a + 2 < 11 ↔ a < 3 := by
+  sorry
+
+@[autograded 6]
+theorem problem4 (t : ℤ) : t ^ 2 + t + 3 ≡ 0 [ZMOD 5] ↔ t ≡ 1 [ZMOD 5] ∨ t ≡ 3 [ZMOD 5] := by
   sorry
 
 @[autograded 4]
-theorem problem5 : ¬ Int.Even 7 := by
-  dsimp [Int.Even]
-  push_neg
+theorem problem5 (P Q : Prop) : (P ∧ Q) ↔ (Q ∧ P) := by
   sorry
 
-@[autograded 4]
-theorem problem6 {p : ℕ} (k : ℕ) (hk1 : k ≠ 1) (hkp : k ≠ p) (hk : k ∣ p) : ¬ Prime p := by
-  dsimp [Prime]
-  push_neg
+@[autograded 5]
+theorem problem6 (P : α → Prop) (Q : Prop) : ((∃ x, P x) ∧ Q) ↔ ∃ x, (P x ∧ Q) := by
   sorry
